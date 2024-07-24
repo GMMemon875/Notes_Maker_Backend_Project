@@ -9,43 +9,49 @@
   </head>
   <body>
     <div class="flex flex-col h-screen bg-gray-700">
-      <form action="" method="" class="m-4 py-4">
+    
+       
+      <form  action="/create" method="post" class="m-4 py-4" >
         <input
           class="block w-full bg-gray-500 text-white rounded-lg min-h-14 p-5 border-2"
           type="text"
-          placeholder="enter the file name"
+          placeholder="enter the file name" name="title"
         />
         <textarea
           class="block mt-4 w-full resize min-h-44 bg-gray-500 rounded-lg p-5 border-2"
           name=""
           id=""
-          placeholder="write the Notes"
+          placeholder="write the Notes" name="detail"
         ></textarea>
-        <button type="submit" class="text-white bg-indigo-500 py-2 px-4 m-3 rounded-lg">
+        <button id="form" type="submit" class="text-white bg-indigo-500 py-2 px-4 m-3 rounded-lg">
           Add Task
         </button>
       </form>
 
-      <div>
-        <div class="p-5">No task render</div>
-      </div>
+       
       <div class="container flex-wrap display flex ">
-        <div class="task w-72 bg-gray-800 p-5 m-5 px-4 py4 text-white border-2">lubkjbqufjelkf;KEN
-          <a class="block text-blue-600 mt-4" href="">Red More</a>
-        
+       <% if(file.length > 0 ){ %>
+        <% file.forEach(function(val){ %>
+
+          <div class="task w-72 bg-gray-800 p-5 m-5 px-4 py4 text-white border-2">lubkjbqufjelkf;KEN
+            <a class="block text-blue-600 mt-4" href="">Red More</a>
+          
+          </div>
+          
+           
+          
+
+
+          <% }) %>
+
+      <% } else {   %>
+        <div>
+          <div class="p-5">No task render</div>
         </div>
-        <div class="task w-72 bg-gray-800 p-5 m-5 px-4 py4 text-white border-2">lubkjbqufjelkf;KEN
-          <a class="block text-blue-600 mt-4" href="">Red More</a>
         
-        </div>
-        <div class="task w-72 bg-gray-800 p-5 m-5 px-4 py4 text-white border-2">lubkjbqufjelkf;KEN
-          <a class="block text-blue-600 mt-4" href="">Red More</a>
+     <% } %>
         
-        </div>
-        <div class="task w-72 bg-gray-800 p-5 m-5 px-4 py4 text-white border-2">lubkjbqufjelkf;KEN
-          <a class="block text-blue-600 mt-4" href="">Red More</a>
         
-        </div> 
         
       </div>
     </div>
