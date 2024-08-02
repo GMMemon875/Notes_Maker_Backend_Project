@@ -34,9 +34,13 @@
         <% file.forEach(function(val){ %>
 
           <div class="task w-72 bg-gray-800 p-5 m-5 px-4 py4 text-white border-2 "> <%= val %>
-            <a  class="block text-blue-600 mt-4" href="/file/<%= val %>">Red More</a>
+           
+          <div class="flex w-full justify-between ">
+            <a  class="block text-blue-600 mt-4 " href="/file/<%= val %>">Red More</a>
             <a  class="block text-blue-600 mt-4" href="/edit/<%= val %>">edit</a>
+            
           
+          </div>  
           </div>
           
            

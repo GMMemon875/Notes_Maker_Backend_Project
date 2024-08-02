@@ -48,6 +48,12 @@ app.get("/file/:filename", function (req, res) {
     }
   );
 });
+
+app.get("/edit/:filename", function (req, res) {
+  // us ko ham /edit  route per dekh sakte hen
+  res.render("edit.ejs", { filename: req.params.filename }); //jo be Route ka name title men show raha he wo mani edit.ejs file men as a props bejh deya value men
+});
+
 app.listen(3000, function () {
   // hamara app yani sarver 3000 port per chal raha he listen kar rahaa he
   console.log("3000 port is ready");
