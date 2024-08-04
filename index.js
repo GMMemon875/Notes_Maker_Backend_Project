@@ -42,16 +42,28 @@ app.get("/file/:filename", function (req, res) {
     function (err, filedata) {
       // wo jo data save ho aa he us ko hamm filedata men save keya fer us ko show.ejs file ke help se display keya
       res.render("show.ejs", {
-        filename: req.params.filename,
-        filedata: filedata,
+        filename: req.params.filename, // ye filename /route men jo file.txt banaya he us file ko readfile ke keya save he us ke title men
+        filedata: filedata, // and detail men filedata men body men save he
       });
     }
   );
 });
 
 app.get("/edit/:filename", function (req, res) {
+  // filename men route ka name save he
   // us ko ham /edit  route per dekh sakte hen
-  res.render("edit.ejs", { filename: req.params.filename }); //jo be Route ka name title men show raha he wo mani edit.ejs file men as a props bejh deya value men
+  res.render("edit.ejs", { filename: req.params.filename }); //jo be Route ka name title ke route men show ho raha he wo mani edit.ejs file men as a props bejh deya value men
+});
+
+app.post("/edit", function (req, res) {
+  const previousPath = `./files/${req.body.OldName}`;
+  const newPath = `./files/${req.body.NewName}`;
+  // edit men jo kuch men change save lekh kar post karengi to console.log
+  // rename karni ke lei Node filerename karni ke lei use karengi
+  // console.log(req.body.previous);
+  fs.rename(previousPath, newPath, function (err) {
+    res.redirect("/");
+  });
 });
 
 app.listen(3000, function () {
