@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/style/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
+    <title>GM Nots</title>
   </head>
-  <body>
-    <div class="flex flex-col h-screen bg-gray-700">
-    
+  <body class="bg-gray-700">
+    <div class="text-white text-6xl text-center">
+      NOTS
+    </div>
+    <div class="flex flex-col h-screen  ">
+
        
       <form  action="/create" method="post" class="m-4 py-4" >
         <input
@@ -29,7 +32,7 @@
       </form>
 
        
-      <div class="container flex-wrap display flex ">
+      <div class=" flex-wrap display flex ">
        <% if(file.length > 0 ){ %>
         <% file.forEach(function(val){ %>
 
@@ -37,7 +40,9 @@
            
           <div class="flex w-full justify-between ">
             <a  class="block text-blue-600 mt-4 " href="/file/<%= val %>">Red More</a>
+            <a class="block text-blue-600 mt-4 " href="/Delete/<%= val %>">Delete</a>
             <a  class="block text-blue-600 mt-4" href="/edit/<%= val %>">edit</a>
+            
             
           
           </div>  

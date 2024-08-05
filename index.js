@@ -2,12 +2,11 @@ const express = require("express"); // sab se pahly ham express ko requre kar ke
 const app = express(); //express ko app name ke varibale men save karengi
 const path = require("path"); // kese be path ko join karni ke lei path ko require keya jata he
 
-const fs = require("fs");
-// const { title } = require("process");
+const fs = require("fs"); // file Systeam in Node
 
 app.set("views enjine", "ejs"); // ejs ko install kar ke us ko setup karen gi (app) men
-app.use(express.json()); // / express.json middleware ko use karte hain taake incoming request body ko JSON format mein parse kiya ja sake
-app.use(express.urlencoded({ extended: true })); // express.urlencoded middleware ko use karte hain taake incoming request body ko URL-encoded format mein parse kiya ja sake. 'extended: true' option ka matlab hai ki hum query string parsing mein qs library ka use kar rahe hain jo complex objects ko handle kar sakta hai.
+app.use(express.json()); // / express.json middleware ko use karte hain taake incoming request body ko JSON format mein read kiya ja sake
+app.use(express.urlencoded({ extended: true })); // express.urlencoded middleware ko use karte hain taake incoming request body ko URL-encoded format mein parse kiya ja sake. 'extended: true' option ka matlab hai ki hum query string parsing mein us library ka use kar rahe hain jo complex objects ko handle kar sakta hai.
 app.use(express.static(path.join(__dirname, "public"))); // static ka matlb hota he ke koie be Html files ko add karni lei html csss javascript ye sab static file hen  public us folder ka name he jis men ham ni ye sab static file rakhe hen __dirname matlb us men file ko dhondo
 
 app.get("/", function (req, res) {
@@ -56,13 +55,30 @@ app.get("/edit/:filename", function (req, res) {
 });
 
 app.post("/edit", function (req, res) {
-  const previousPath = `./files/${req.body.OldName}`;
-  const newPath = `./files/${req.body.NewName}`;
-  // edit men jo kuch men change save lekh kar post karengi to console.log
-  // rename karni ke lei Node filerename karni ke lei use karengi
-  // console.log(req.body.previous);
+  const previousPath = `./files/${req.body.OldName}`; // edit men jo previous name he us ko target keya he jo files men save he previousPath ke varible men save keya he
+  const newPath = `./files/${req.body.NewName}`; //edit men jo new name change karna he us ke target keya he fer us ko newPath ke varible men sav keya he
+
+  // console.log(req.body); // dekhni ke lei ke req.body men previous and new name men data aa rahaa he
+
   fs.rename(previousPath, newPath, function (err) {
-    res.redirect("/");
+    // file systeam ke helip se rename kaya he he
+    if (err) {
+      console.log("eror");
+    } else res.redirect("/"); // rename hone ke band jo hamara route he back / per aa jaie home per
+  });
+});
+
+app.get("/delete/:filname", function (req, res) {
+  res.render("delete.ejs", { filename: req.params.filname });
+});
+
+app.post("/delete", function (req, res) {
+  fs.unlink(`./files/${req.body.OldName}`, function (err) {
+    if (err) {
+      console.log("Sory");
+    } else {
+      res.redirect("/");
+    }
   });
 });
 
